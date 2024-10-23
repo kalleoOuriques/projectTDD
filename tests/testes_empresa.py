@@ -22,6 +22,5 @@ class TestEmpresa(unittest.TestCase):
 
     def test_incluir_funcionario_em_empresa(self):
         joao = Funcionario("João")
-        id = 1
-        self.empresa.incluir_funcionario(joao)
-        assert_equal(len(self.empresa.funcionarios), id)
+        id_funcionario = self.empresa.incluir_funcionario(joao)
+        assert_equal(joao.id_funcionario, id_funcionario)
