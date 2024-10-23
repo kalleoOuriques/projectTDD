@@ -21,4 +21,7 @@ class Empresa:
         return funcionario.id_funcionario
 
     def incluir_projeto(self, projeto):
+        id_projeto = len(self.projetos) + 1
+        projeto.id_projeto = id_projeto
         self.projetos.append(projeto)
+        return projeto.id_projeto

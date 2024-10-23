@@ -33,6 +33,5 @@ class TestEmpresa(unittest.TestCase):
 
     def test_incluir_projeto_em_empresa(self):
         app_banco_online = Projeto("App Banco Online")
-        id_projeto = 1
-        self.empresa.incluir_projeto(app_banco_online)
-        assert_equal(id_projeto, len(self.empresa.projetos))
+        id_projeto = self.empresa.incluir_projeto(app_banco_online)
+        assert_equal(app_banco_online.id_projeto, id_projeto)
