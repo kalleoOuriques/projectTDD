@@ -69,3 +69,14 @@ class TestEmpresa(unittest.TestCase):
 
         assert_equal(joao, funcionario_obtido)
 
+    def test_incluir_duas_vezes_o_mesmo_funcionario(self):
+        joao = self.empresa.criar_funcionario("João")
+        id_joao = self.empresa.incluir_funcionario(joao)
+        app_banco_online = Projeto("App Banco Online")
+        id_app_banco_online = self.empresa.incluir_projeto(app_banco_online)
+        self.empresa.incluir_funcionario_em_projeto(joao, app_banco_online)
+
+        resultado_inclusao = self.empresa.incluir_funcionario_em_projeto(joao, app_banco_online)
+
+        assert_equal(resultado_inclusao,'Funcionario ja esta no projeto')
+
