@@ -1,4 +1,5 @@
 from src.funcionario import Funcionario
+from src.projeto import Projeto
 
 
 class Empresa:
@@ -8,6 +9,9 @@ class Empresa:
 
     def criar_funcionario(self, nome_funcionario):
         return Funcionario(nome_funcionario)
+
+    def criar_projeto(self, nome_projeto):
+        return Projeto(nome_projeto)
 
     def incluir_funcionario(self, funcionario):
         id_funcionario = len(self.funcionarios) + 1

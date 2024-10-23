@@ -4,6 +4,7 @@ from statsmodels.tools.testing import assert_equal
 
 from src.empresa import Empresa
 from src.funcionario import Funcionario
+from src.projeto import Projeto
 
 
 class TestEmpresa(unittest.TestCase):
@@ -22,7 +23,7 @@ class TestEmpresa(unittest.TestCase):
 
     def test_criar_projeto(self):
         nome = "App Banco Online"
-        projeto = Projeto(nome)
+        projeto = self.empresa.criar_projeto(nome)
         assert_equal(projeto.nome, nome)
 
     def test_incluir_funcionario_em_empresa(self):
