@@ -29,3 +29,7 @@ class Empresa:
     def obter_funcionario_por_id(self, id_funcionario):
         funcionario = self.funcionarios[id_funcionario - 1]
         return funcionario
+
+    def obter_projeto_por_id(self, id_projeto):
+        projeto = self.projetos[id_projeto - 1]
+        return projeto
