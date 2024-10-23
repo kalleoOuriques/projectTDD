@@ -13,4 +13,4 @@ class Empresa:
         id_funcionario = len(self.funcionarios) + 1
         funcionario.id_funcionario = id_funcionario
         self.funcionarios.append(funcionario)
-        return id
+        return funcionario.id_funcionario
