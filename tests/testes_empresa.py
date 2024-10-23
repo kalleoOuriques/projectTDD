@@ -58,3 +58,14 @@ class TestEmpresa(unittest.TestCase):
         self.empresa.incluir_funcionario_em_projeto(joao, app_banco_online)
 
         assert_equal(joao, app_banco_online.obter_funcionario(id_joao))
+
+    def test_obter_funcionario_em_projeto(self):
+        joao = self.empresa.criar_funcionario("João")
+        id_joao = self.empresa.incluir_funcionario(joao)
+        app_banco_online = Projeto("App Banco Online")
+        self.empresa.incluir_funcionario_em_projeto(joao, app_banco_online)
+
+        funcionario_obtido = app_banco_online.obter_funcionario(id_joao)
+
+        assert_equal(joao, funcionario_obtido)
+
