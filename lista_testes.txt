@@ -1,0 +1,11 @@
+Lista inicial de testes:
+- Criar empresa
+- Criar funcionário
+- Incluir funcionário na empresa
+- Criar projeto
+- Incluir projeto na empresa
+- Obter funcionário
+- Obter projeto
+- Incluir funcionário no projeto
+- Obter funcionário do projeto
+- Incluir o mesmo funcionário duas vezes
