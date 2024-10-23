@@ -33,3 +33,14 @@ class Empresa:
     def obter_projeto_por_id(self, id_projeto):
         projeto = self.projetos[id_projeto - 1]
         return projeto
+
+    def incluir_funcionario_em_projeto(self, funcionario, projeto):
+
+        # Checar se funcionario ja estã na empresa
+        for f in projeto.funcionarios:
+            if funcionario.id_funcionario == f.id_funcionario:
+                return 'Funcionario ja esta no projeto'
+
+        projeto.funcionarios.append(funcionario)
+
+        return 'Funcionario foi adicionado com sucesso'

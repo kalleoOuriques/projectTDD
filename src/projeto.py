@@ -5,7 +5,7 @@ class Projeto:
         self.funcionarios = []
 
 
-    # def obter_funcionario(self, id):
-    #     for funcionario in self.funcionarios:
-    #         if funcionario.id_funcionario == id:
-    #             return funcionario
+    def obter_funcionario(self, id):
+        for funcionario in self.funcionarios:
+            if funcionario.id_funcionario == id:
+                return funcionario
