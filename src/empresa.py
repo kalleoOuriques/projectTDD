@@ -6,6 +6,7 @@ class Empresa:
     def __init__(self, nome):
         self.nome = nome
         self.funcionarios = []
+        self.projetos = []
 
     def criar_funcionario(self, nome_funcionario):
         return Funcionario(nome_funcionario)
@@ -18,3 +19,6 @@ class Empresa:
         funcionario.id_funcionario = id_funcionario
         self.funcionarios.append(funcionario)
         return funcionario.id_funcionario
+
+    def incluir_projeto(self, projeto):
+        self.projetos.append(projeto)
