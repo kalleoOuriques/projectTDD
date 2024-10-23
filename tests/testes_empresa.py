@@ -3,6 +3,7 @@ import unittest
 from statsmodels.tools.testing import assert_equal
 
 from src.empresa import Empresa
+from src.funcionario import Funcionario
 
 
 class TestEmpresa(unittest.TestCase):
