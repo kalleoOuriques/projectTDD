@@ -10,3 +10,8 @@ class TestEmpresa(unittest.TestCase):
         nome = "Bradesco"
         empresa = Empresa(nome)
         assert_equal(empresa.nome, nome)
+
+    def test_criar_funcionario(self):
+        nome = "João"
+        funcionario = Funcionario(nome)
+        assert_equal(funcionario.nome, nome)
