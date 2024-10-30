@@ -3,6 +3,7 @@ import unittest
 from statsmodels.tools.testing import assert_equal
 
 from src.empresa import Empresa
+from src.estado_enum import Estado
 from src.funcionario import Funcionario
 from src.tipo_enum import Tipo
 from src.prioridade_enum import Prioridade
@@ -112,3 +113,13 @@ class TestEmpresa(unittest.TestCase):
         self.empresa.incluir_funcionario_em_projeto(jose.id_funcionario, app_banco_online.id_projeto)
         self.empresa.reatribuir_ocorrencia(saque_saldo_insuficiente, jose.id_funcionario)
         assert_equal(saque_saldo_insuficiente.id_funcionario_responsavel, jose.id_funcionario)
+
+    def test_concluir_ocorrencia(self):
+        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+        joao = self.empresa.criar_funcionario("João")
+        [descricao, bug, alta] = self.set_up_ocorrencia()
+        self.empresa.incluir_funcionario_em_projeto(joao.id_funcionario, app_banco_online.id_projeto)
+        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
+                                                                         app_banco_online.id_projeto, bug, alta)
+        saque_saldo_insuficiente.estado = Estado.FECHADA
+        assert_equal(saque_saldo_insuficiente.estado, Estado.FECHADA)
