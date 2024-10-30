@@ -9,38 +9,71 @@ class Empresa:
         self.projetos = []
 
     def criar_funcionario(self, nome_funcionario):
-        return Funcionario(nome_funcionario)
-
-    def criar_projeto(self, nome_projeto):
-        return Projeto(nome_projeto)
-
-    def incluir_funcionario(self, funcionario):
-        id_funcionario = len(self.funcionarios) + 1
-        funcionario.id_funcionario = id_funcionario
+        funcionario = Funcionario(nome_funcionario, len(self.funcionarios) + 1)
         self.funcionarios.append(funcionario)
-        return funcionario.id_funcionario
-
-    def incluir_projeto(self, projeto):
-        id_projeto = len(self.projetos) + 1
-        projeto.id_projeto = id_projeto
-        self.projetos.append(projeto)
-        return projeto.id_projeto
-
-    def obter_funcionario_por_id(self, id_funcionario):
-        funcionario = self.funcionarios[id_funcionario - 1]
         return funcionario
 
-    def obter_projeto_por_id(self, id_projeto):
-        projeto = self.projetos[id_projeto - 1]
+    def criar_projeto(self, nome_projeto):
+        projeto = Projeto(nome_projeto, len(self.projetos) + 1)
+        self.projetos.append(projeto)
         return projeto
 
-    def incluir_funcionario_em_projeto(self, funcionario, projeto):
+    # def incluir_funcionario(self, funcionario):
+    #     id_funcionario = len(self.funcionarios) + 1
+    #     funcionario.id_funcionario = id_funcionario
+    #     self.funcionarios.append(funcionario)
+    #     return funcionario.id_funcionario
+    #
+    # def incluir_projeto(self, projeto):
+    #     id_projeto = len(self.projetos) + 1
+    #     projeto.id_projeto = id_projeto
+    #     self.projetos.append(projeto)
+    #     return projeto.id_projeto
 
-        # Checar se funcionario ja estã na empresa
-        for f in projeto.funcionarios:
-            if funcionario.id_funcionario == f.id_funcionario:
-                return 'Funcionario ja esta no projeto'
+    def obter_funcionario_por_id(self, id_funcionario):
+        for funcionario in self.funcionarios:
+            if funcionario.id_funcionario == id_funcionario:
+                return funcionario
 
-        projeto.funcionarios.append(funcionario)
+        return 'Funcionario inexistente'
+
+    def obter_projeto_por_id(self, id_projeto):
+        for projeto in self.projetos:
+            if projeto.id_projeto == id_projeto:
+                return projeto
+
+        return 'Projeto inexistente'
+
+    def incluir_funcionario_em_projeto(self, id_funcionario, id_projeto):
+
+        # Checa se funcionario esta na empresa
+        # se estiver, o retorna
+        funcionario = self.obter_funcionario_por_id(id_funcionario)
+        if funcionario == 'Funcionario inexistente':
+            return funcionario
+
+        # Checa se o projeto pertence a empresa
+        # se pertencer, o retorna
+        projeto = self.obter_projeto_por_id(id_projeto)
+        if projeto == 'Projeto inexistente':
+            return projeto
+
+        # Checar se funcionario ja estã no projeto
+        if id_funcionario in projeto.funcionarios:
+            return 'Funcionario ja esta no projeto'
+
+        projeto.funcionarios.append(id_funcionario)
 
         return 'Funcionario foi adicionado com sucesso'
+
+    def obter_funcionarios_do_projeto(self, projeto_id):
+        projeto = self.obter_projeto_por_id(projeto_id)
+        if projeto == 'Projeto inexistente':
+            return projeto
+
+        funcionarios = []
+        for id_funcionario in projeto.funcionarios:
+            funcionario = self.obter_funcionario_por_id(id_funcionario)
+            funcionarios.append(funcionario)
+
+        return funcionarios
