@@ -3,4 +3,5 @@ class Projeto:
         self.nome = nome
         self.id_projeto = id_projeto
         self.funcionarios = []
+        self.ocorrencias = []
 

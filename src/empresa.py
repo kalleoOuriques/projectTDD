@@ -1,4 +1,5 @@
 from src.funcionario import Funcionario
+from src.ocorrencia import Ocorrencia
 from src.projeto import Projeto
 
 
@@ -77,3 +78,17 @@ class Empresa:
             funcionarios.append(funcionario)
 
         return funcionarios
+
+    def criar_ocorrencia_projeto(self, descricao, id_funcionario, id_projeto, tipo, prioridade):
+        projeto = self.obter_projeto_por_id(id_projeto)
+        if projeto == 'Projeto inexistente':
+            return projeto
+
+        funcionario = self.obter_funcionario_por_id(id_funcionario)
+        if funcionario == 'Funcionario inexistente':
+            return funcionario
+
+        ocorrencia = Ocorrencia(len(projeto.ocorrencias) + 1, descricao, id_funcionario, id_projeto, tipo, prioridade)
+        projeto.ocorrencias.append(ocorrencia)
+        funcionario.ocorrencias_atribuidas.append(ocorrencia.id_ocorrencia)
+        return ocorrencia

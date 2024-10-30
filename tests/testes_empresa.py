@@ -3,7 +3,8 @@ import unittest
 from statsmodels.tools.testing import assert_equal
 
 from src.empresa import Empresa
-
+from src.tipo_enum import Tipo
+from src.prioridade_enum import Prioridade
 
 class TestEmpresa(unittest.TestCase):
     def setUp(self):
@@ -74,5 +75,7 @@ class TestEmpresa(unittest.TestCase):
         app_banco_online = self.empresa.criar_projeto("App Banco Online")
         descricao = 'Saque em conta com saldo insuficiente'
         joao = self.empresa.criar_funcionario("João")
-        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao, app_banco_online.id_projeto)
+        bug = Tipo.BUG
+        alta = Prioridade.ALTA
+        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario, app_banco_online.id_projeto, bug, alta)
         assert_equal(saque_saldo_insuficiente.descricao, descricao)
