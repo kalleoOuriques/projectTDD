@@ -87,8 +87,17 @@ class Empresa:
         funcionario = self.obter_funcionario_por_id(id_funcionario)
         if funcionario == 'Funcionario inexistente':
             return funcionario
+        if self.check_atribuir_ocorrencia_funcionario(funcionario, projeto):
+            ocorrencia = Ocorrencia(len(projeto.ocorrencias) + 1, descricao, id_funcionario, id_projeto, tipo, prioridade)
+            projeto.ocorrencias.append(ocorrencia)
+            funcionario.ocorrencias_atribuidas.append(ocorrencia.id_ocorrencia)
+            return ocorrencia
+        else:
+            return 'Não é possível criar ocorrencia'
 
-        ocorrencia = Ocorrencia(len(projeto.ocorrencias) + 1, descricao, id_funcionario, id_projeto, tipo, prioridade)
-        projeto.ocorrencias.append(ocorrencia)
-        funcionario.ocorrencias_atribuidas.append(ocorrencia.id_ocorrencia)
-        return ocorrencia
+    def check_atribuir_ocorrencia_funcionario(self, funcionario, projeto):
+        if funcionario.id_funcionario not in projeto.funcionarios:
+            return False
+        if len(funcionario.ocorrencias_atribuidas) >= 10:
+            return False
+        return True
