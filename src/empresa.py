@@ -134,3 +134,8 @@ class Empresa:
             else:
                 return 'Ocorrência já foi concluída'
         return 'Erro ao concluir ocorrência'
+
+
+    def mudar_prioridade_ocorrencia(self, ocorrencia, prioridade):
+        if ocorrencia.estado == Estado.ABERTA:
+            ocorrencia.prioridade = prioridade

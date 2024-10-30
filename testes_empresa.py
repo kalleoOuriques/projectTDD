@@ -151,11 +151,11 @@ class TestEmpresa(unittest.TestCase):
         app_banco_online = self.empresa.criar_projeto("App Banco Online")
         joao = self.empresa.criar_funcionario("João")
         [descricao, bug, alta] = self.set_up_ocorrencia()
+        self.empresa.incluir_funcionario_em_projeto(joao.id_funcionario, app_banco_online.id_projeto)
         saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
                                                                          app_banco_online.id_projeto, bug, alta)
 
-
-        saque_saldo_insuficiente = self.empresa.mudar_prioridade_ocorrencia(saque_saldo_insuficiente, Prioridade.BAIXA)
+        self.empresa.mudar_prioridade_ocorrencia(saque_saldo_insuficiente, Prioridade.BAIXA)
 
         assert_equal(saque_saldo_insuficiente.prioridade, Prioridade.BAIXA)
 
