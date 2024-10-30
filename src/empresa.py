@@ -101,3 +101,21 @@ class Empresa:
         if len(funcionario.ocorrencias_atribuidas) >= 10:
             return False
         return True
+
+    def obter_projeto_por_ocorrencia(self, ocorrencia):
+        for projeto in self.projetos:
+            if ocorrencia in projeto.ocorrencias:
+                return projeto
+        return 'Projeto inexistente'
+
+    def reatribuir_ocorrencia(self, ocorrencia, id_funcionario):
+        projeto = self.obter_projeto_por_ocorrencia(ocorrencia)
+        funcionario = self.obter_funcionario_por_id(id_funcionario)
+        if funcionario == 'Funcionario inexistente':
+            return funcionario
+
+        if projeto != 'Projeto inexistente' and self.check_atribuir_ocorrencia_funcionario(funcionario, projeto):
+            ocorrencia.id_funcionario_responsavel = id_funcionario
+            return ocorrencia
+        else:
+            return 'Erro ao reatribuir ocorrencia'
