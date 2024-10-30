@@ -3,6 +3,7 @@ import unittest
 from statsmodels.tools.testing import assert_equal
 
 from src.empresa import Empresa
+from src.funcionario import Funcionario
 from src.tipo_enum import Tipo
 from src.prioridade_enum import Prioridade
 
@@ -71,11 +72,22 @@ class TestEmpresa(unittest.TestCase):
 
     # EX. 9
 
-    def test_criar_ocorrencia(self):
-        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+    def set_up_ocorrencia(self):
         descricao = 'Saque em conta com saldo insuficiente'
-        joao = self.empresa.criar_funcionario("João")
         bug = Tipo.BUG
         alta = Prioridade.ALTA
+        return [descricao, bug, alta]
+
+    def test_criar_ocorrencia(self):
+        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+        joao = self.empresa.criar_funcionario("João")
+        [descricao, bug, alta] = self.set_up_ocorrencia()
         saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario, app_banco_online.id_projeto, bug, alta)
         assert_equal(saque_saldo_insuficiente.descricao, descricao)
+
+    def test_atribuir_ocorrencia_funcionario_fora_empresa(self):
+        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+        jose = Funcionario('José', 3)
+        [descricao, bug, alta] = self.set_up_ocorrencia()
+        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, jose.id_funcionario, app_banco_online.id_projeto, bug, alta)
+        assert_equal(saque_saldo_insuficiente, 'Funcionario inexistente')
