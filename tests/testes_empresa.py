@@ -68,3 +68,11 @@ class TestEmpresa(unittest.TestCase):
 
         assert_equal(resultado_inclusao,'Funcionario ja esta no projeto')
 
+    # EX. 9
+
+    def test_criar_ocorrencia(self):
+        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+        descricao = 'Saque em conta com saldo insuficiente'
+        joao = self.empresa.criar_funcionario("João")
+        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao, app_banco_online.id_projeto)
+        assert_equal(saque_saldo_insuficiente.descricao, descricao)
