@@ -147,19 +147,17 @@ class TestEmpresa(unittest.TestCase):
         saque_saldo_insuficiente = self.empresa.concluir_ocorrencia(saque_saldo_insuficiente, jose.id_funcionario)
         assert_equal(saque_saldo_insuficiente, 'Erro ao concluir ocorrência')
 
-    def test_modificar_responsavel(self):
+    def test_mudar_prioridade_ocorrencia(self):
         app_banco_online = self.empresa.criar_projeto("App Banco Online")
         joao = self.empresa.criar_funcionario("João")
-        jose = self.empresa.criar_funcionario("José")
         [descricao, bug, alta] = self.set_up_ocorrencia()
         saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
                                                                          app_banco_online.id_projeto, bug, alta)
 
 
-        saque_saldo_insuficiente = self.empresa.mudar_responsavel_ocorrencia(saque_saldo_insuficiente, jose.id_funcionario)
+        saque_saldo_insuficiente = self.empresa.mudar_prioridade_ocorrencia(saque_saldo_insuficiente, Prioridade.BAIXA)
 
-        assert_equal(saque_saldo_insuficiente.id_funcionario_responsavel, jose.id_funcionario)
-
+        assert_equal(saque_saldo_insuficiente.prioridade, Prioridade.BAIXA)
 
 
 unittest.main()
