@@ -121,5 +121,6 @@ class TestEmpresa(unittest.TestCase):
         self.empresa.incluir_funcionario_em_projeto(joao.id_funcionario, app_banco_online.id_projeto)
         saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
                                                                          app_banco_online.id_projeto, bug, alta)
-        saque_saldo_insuficiente.estado = Estado.FECHADA
+        # saque_saldo_insuficiente.estado = Estado.FECHADA
+        self.empresa.concluir_ocorrencia(saque_saldo_insuficiente, joao.id_funcionario)
         assert_equal(saque_saldo_insuficiente.estado, Estado.FECHADA)

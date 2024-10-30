@@ -1,3 +1,4 @@
+from src.estado_enum import Estado
 from src.funcionario import Funcionario
 from src.ocorrencia import Ocorrencia
 from src.projeto import Projeto
@@ -119,3 +120,16 @@ class Empresa:
             return ocorrencia
         else:
             return 'Erro ao reatribuir ocorrencia'
+
+    def concluir_ocorrencia(self, ocorrencia, id_funcionario):
+        projeto = self.obter_projeto_por_ocorrencia(ocorrencia)
+        funcionario = self.obter_funcionario_por_id(id_funcionario)
+        if funcionario == 'Funcionario inexistente':
+            return funcionario
+
+        if projeto != 'Projeto inexistente' and ocorrencia.id_funcionario_responsavel == id_funcionario:
+            if ocorrencia.estado == Estado.ABERTA:
+                ocorrencia.estado = Estado.FECHADA
+                return ocorrencia
+            else:
+                return 'Ocorrencia já foi fechada'
