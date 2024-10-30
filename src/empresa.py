@@ -133,3 +133,4 @@ class Empresa:
                 return ocorrencia
             else:
                 return 'Ocorrência já foi concluída'
+        return 'Erro ao concluir ocorrência'
