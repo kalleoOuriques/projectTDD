@@ -31,16 +31,6 @@ class TestEmpresa(unittest.TestCase):
 
         assert_equal(self.empresa.projetos, [assistente_ia, loading_page, mensageria])
 
-    # def test_incluir_funcionario_em_empresa(self):
-    #     joao = Funcionario("João")
-    #     id_funcionario = self.empresa.incluir_funcionario(joao)
-    #     assert_equal(joao.id_funcionario, id_funcionario)
-    #
-    # def test_incluir_projeto_em_empresa(self):
-    #     app_banco_online = Projeto("App Banco Online")
-    #     id_projeto = self.empresa.incluir_projeto(app_banco_online)
-    #     assert_equal(app_banco_online.id_projeto, id_projeto)
-
     def test_obter_funcionario_em_empresa(self):
         joao = self.empresa.criar_funcionario("João")
         jose = self.empresa.criar_funcionario("José")
