@@ -121,6 +121,16 @@ class TestEmpresa(unittest.TestCase):
         self.empresa.incluir_funcionario_em_projeto(joao.id_funcionario, app_banco_online.id_projeto)
         saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
                                                                          app_banco_online.id_projeto, bug, alta)
-        # saque_saldo_insuficiente.estado = Estado.FECHADA
         self.empresa.concluir_ocorrencia(saque_saldo_insuficiente, joao.id_funcionario)
-        assert_equal(saque_saldo_insuficiente.estado, Estado.FECHADA)
+        assert_equal(saque_saldo_insuficiente.estado, Estado.CONCLUIDA)
+
+    def test_concluir_ocorrencia_concluida(self):
+        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+        joao = self.empresa.criar_funcionario("João")
+        [descricao, bug, alta] = self.set_up_ocorrencia()
+        self.empresa.incluir_funcionario_em_projeto(joao.id_funcionario, app_banco_online.id_projeto)
+        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
+                                                                         app_banco_online.id_projeto, bug, alta)
+        self.empresa.concluir_ocorrencia(saque_saldo_insuficiente, joao.id_funcionario)
+        saque_saldo_insuficiente = self.empresa.concluir_ocorrencia(saque_saldo_insuficiente, joao.id_funcionario)
+        assert_equal(saque_saldo_insuficiente, 'Ocorrência já foi concluída')

@@ -129,7 +129,7 @@ class Empresa:
 
         if projeto != 'Projeto inexistente' and ocorrencia.id_funcionario_responsavel == id_funcionario:
             if ocorrencia.estado == Estado.ABERTA:
-                ocorrencia.estado = Estado.FECHADA
+                ocorrencia.estado = Estado.CONCLUIDA
                 return ocorrencia
             else:
-                return 'Ocorrencia já foi fechada'
+                return 'Ocorrência já foi concluída'
