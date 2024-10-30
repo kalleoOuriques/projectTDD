@@ -100,3 +100,14 @@ class TestEmpresa(unittest.TestCase):
         saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
                                                                          app_banco_online.id_projeto, bug, alta)
         assert_equal(saque_saldo_insuficiente, 'Não é possível criar ocorrencia')
+
+    def test_reatribuir_ocorrencia(self):
+        app_banco_online = self.empresa.criar_projeto("App Banco Online")
+        joao = self.empresa.criar_funcionario("João")
+        jose = self.empresa.criar_funcionario("José")
+        [descricao, bug, alta] = self.set_up_ocorrencia()
+        self.empresa.incluir_funcionario_em_projeto(joao.id_funcionario, app_banco_online.id_projeto)
+        saque_saldo_insuficiente = self.empresa.criar_ocorrencia_projeto(descricao, joao.id_funcionario,
+                                                                         app_banco_online.id_projeto, bug, alta)
+        saque_saldo_insuficiente.id_funcionario_responsavel = jose.id_funcionario
+        assert_equal(saque_saldo_insuficiente.id_funcionario_responsavel, jose.id_funcionario)
